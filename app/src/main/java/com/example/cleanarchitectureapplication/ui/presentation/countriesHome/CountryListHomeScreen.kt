@@ -11,11 +11,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -27,18 +30,22 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.example.cleanarchitectureapplication.R
+import com.example.cleanarchitectureapplication.ui.navigation.route.auth.AuthViewModel
 import com.example.cleanarchitectureapplication.ui.presentation.countriesHome.components.CountryList
 import com.example.cleanarchitectureapplication.ui.presentation.countriesHome.components.CountryListError
 import com.example.cleanarchitectureapplication.ui.presentation.countriesHome.components.LogoImage
 import com.example.cleanarchitectureapplication.ui.presentation.countriesHome.components.SearchBar
 import com.example.cleanarchitectureapplication.ui.presentation.countriesHome.components.ShimmerListItem
+import com.example.cleanarchitectureapplication.util.viewUtil.LogoutMenu
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SharedTransitionScope.CountryListHomeScreen(
     navController: NavHostController,
     viewModel: CountryListHomeViewModel = hiltViewModel(),
-    animatedVisibilityScope: AnimatedVisibilityScope
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    authviewModel: AuthViewModel= hiltViewModel()
 ) {
     var searchText by rememberSaveable { mutableStateOf("") }
     val countriesListState = viewModel.countriesListState.collectAsState().value
@@ -60,7 +67,7 @@ fun SharedTransitionScope.CountryListHomeScreen(
        // LogoImage(imageState)
 
         imageState.painter?.let {
-            SearchBar(searchText = searchText, onValueChange = { searchText = it })
+            SearchBar(searchText = searchText,  onValueChange = { searchText = it })
             when (countriesListState) {
                 is CountryListHomeViewModel.CountriesListState.Loading -> {
                     LazyColumn(
@@ -93,4 +100,7 @@ fun SharedTransitionScope.CountryListHomeScreen(
             }
         }
     }
+
+
 }
+

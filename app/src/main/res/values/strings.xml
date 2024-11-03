@@ -50,4 +50,22 @@
     <string name="country_name_key">countryName:/</string>
     <string name="country_flag_key">countryFlag:/</string>
 
+
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="hello">Hey there</string>
+    <string name="create_accounts">Create an Account</string>
+    <string name="login_accounts">SignIn an Account</string>
+    <string name="welcome">Welcome Back</string>
+    <string name="no_account_text">You don\'t have an accounts? Sign up</string>
+    <string name="yes_account">You have an accounts? Sign in</string>
+    <string name="terms">By continuing you accept our Privacy Policy and Term of use</string>
+    <string name="term">Term of use</string>
+
+    <string name="firstname">Enter First Name</string>
+    <string name="lastname">Enter Last Name</string>
+    <string name="email">Enter Email</string>
+    <string name="password">Enter Password</string>
+    <string name="hide_pass">Hide Password</string>
+    <string name="show_pass">Show Password</string>
+
 </resources>

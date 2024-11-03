@@ -9,6 +9,7 @@ import com.example.cleanarchitectureapplication.domain.dataSource.CountryDataSou
 import com.example.cleanarchitectureapplication.data.local.AppDatabase
 import com.example.cleanarchitectureapplication.data.local.CountryDao
 import com.example.cleanarchitectureapplication.data.remote.CountriesApi
+import com.example.cleanarchitectureapplication.ui.navigation.route.auth.AuthRepository
 import com.example.cleanarchitectureapplication.util.NetworkUtil
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -101,4 +102,7 @@ object AppModule {
     fun provideCountryDataSource(countryDao: CountryDao): CountryDataSource {
         return CountryDataSourceImpl(countryDao)
     }
+
+    @Provides
+    fun provideAuthRepository() = AuthRepository()
 }

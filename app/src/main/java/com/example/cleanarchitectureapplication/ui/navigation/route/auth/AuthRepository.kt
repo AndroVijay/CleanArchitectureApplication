@@ -1,5 +1,6 @@
 package com.example.cleanarchitectureapplication.ui.navigation.route.auth
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -21,6 +22,7 @@ class AuthRepository {
         } catch (e: Exception) {
             // Handle case where user is not registered
             if (e is FirebaseAuthInvalidUserException) {
+
                 Result.failure(Exception("User with this email is not registered"))
             } else if (e is FirebaseAuthInvalidCredentialsException) {
                 Result.failure(Exception("Invalid credentials. Please check your email and password."))

@@ -20,16 +20,11 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
     fun signIn(email: String, password: String) {
 
         viewModelScope.launch {
-
-
                 val result = authRepository.signIn(email, password)
                 _authResult.value = result
 
-
-
         }
     }
-
 
 
     fun signUp(email: String, password: String) {

@@ -45,7 +45,6 @@ fun SharedTransitionScope.CountryListHomeScreen(
     navController: NavHostController,
     viewModel: CountryListHomeViewModel = hiltViewModel(),
     animatedVisibilityScope: AnimatedVisibilityScope,
-    authviewModel: AuthViewModel= hiltViewModel()
 ) {
     var searchText by rememberSaveable { mutableStateOf("") }
     val countriesListState = viewModel.countriesListState.collectAsState().value

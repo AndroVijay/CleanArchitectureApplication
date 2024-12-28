@@ -30,7 +30,6 @@
     <string name="no_internet_connection">It looks like you are not connected to the internet</string>
 
 
-
     <!-- Gini Index -->
     <string name="gini_index_year">Gini index in %1$s: </string>
     <string name="gini_index_unknown_format">Gini index: Unknown format</string>

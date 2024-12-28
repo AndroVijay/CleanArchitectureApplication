@@ -1,5 +1,6 @@
 package com.example.cleanarchitectureapplication.util.viewUtil
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -57,6 +58,7 @@ import androidx.navigation.NavHostController
 import com.example.cleanarchitectureapplication.R
 import com.example.cleanarchitectureapplication.ui.navigation.route.Routes
 import com.example.cleanarchitectureapplication.ui.navigation.route.auth.AuthViewModel
+import com.example.cleanarchitectureapplication.ui.navigation.route.main.MainScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -363,6 +365,15 @@ fun LoginButton(
 
         Button(
             onClick = {
+
+//                coroutineScope.launch(Dispatchers.IO) {
+//                    viewModel.signIn(email, pass)
+//                }
+//
+//                Toast.makeText(context, "Sign in successfully", Toast.LENGTH_LONG).show()
+//                navController.navigate(Routes.HomeScreen.route)
+
+
                 when (authState) {
                     null -> {
                         coroutineScope.launch(Dispatchers.IO) {
@@ -370,8 +381,10 @@ fun LoginButton(
                         }
                         authResult?.let {
                             when {
+
                                 it.isSuccess -> {
                                     val user = it.getOrNull()
+
                                     if (user != null) {
                                         Toast.makeText(
                                             context,
@@ -380,7 +393,6 @@ fun LoginButton(
                                         ).show()
                                         navController.navigate(Routes.HomeScreen.route)
                                     } else {
-
                                         Toast.makeText(context, "User not found", Toast.LENGTH_LONG)
                                             .show()
 
@@ -398,6 +410,7 @@ fun LoginButton(
                         }
 
                     }
+
                     else -> {
                         navController.navigate(Routes.HomeScreen.route)
                     }

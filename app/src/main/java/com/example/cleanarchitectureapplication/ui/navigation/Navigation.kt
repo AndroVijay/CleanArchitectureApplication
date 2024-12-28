@@ -1,8 +1,15 @@
 package com.example.cleanarchitectureapplication.ui.navigation
 
+import android.os.Build
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,12 +21,16 @@ import com.example.cleanarchitectureapplication.ui.navigation.route.signin.SignI
 import com.example.cleanarchitectureapplication.ui.navigation.route.signup.SignUpScreen
 
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun Navigation(viewModel: AuthViewModel = hiltViewModel()) {
     SharedTransitionLayout {
         val navHostController = rememberNavController()
         val isLoggedIn = viewModel.isUserLoggedIn()
+        val authResult by viewModel.authResult.collectAsState()
+        val context = LocalContext.current
+
 
         NavHost(
             navController = navHostController,
@@ -28,12 +39,12 @@ fun Navigation(viewModel: AuthViewModel = hiltViewModel()) {
 
           composable(Routes.SignInScreen.route) {
 
-              if (!isLoggedIn) {
-                  viewModel.signOut()
-                  SignInScreen(navController = navHostController)
-              }else{
+              if (isLoggedIn) {
                   MainScreen()
+              }else{
+                  SignInScreen(navController = navHostController)
               }
+
           }
 
             composable(Routes.SignupScreen.route) {
